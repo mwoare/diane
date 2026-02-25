@@ -1,11 +1,272 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = (await getCollection('portfolio')).slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home" description="We design spaces that feel as good as they look—where vision meets thoughtful detail. New construction, remodels, cabinetry, and furniture design in the Seattle area.">
+  <Header />
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Diane Rosellini <span class="hero-amp">& Associates</span></h1>
+        <p class="hero-tagline">
+          We design spaces that feel as good as they look—where vision meets thoughtful detail.
+          Whether building from the ground up or transforming what already exists, we specialize in new construction,
+          full-scale remodels, and intentional space planning. From custom cabinetry and furniture design to lighting,
+          plumbing selections, and curated finishing touches, every element is carefully considered. The result is a
+          cohesive, functional interior that reflects your lifestyle and tells your story beautifully.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Curated Works</h2>
+        <div class="portfolio-preview">
+          {projects.length > 0 ? (
+            projects.map((project) => (
+              <a href={`/portfolio/${project.slug}/`} class="card">
+                {project.data.image && (
+                  <img src={project.data.image} alt={project.data.title} class="card-img" />
+                )}
+                <div class="card-body">
+                  <h3 class="card-title">{project.data.title}</h3>
+                  {project.data.description && <p class="card-desc">{project.data.description}</p>}
+                </div>
+              </a>
+            ))
+          ) : (
+            <p class="muted">Portfolio projects will appear here. Add content in <code>src/content/portfolio/</code>.</p>
+          )}
+        </div>
+        {projects.length > 0 && (
+          <p class="section-cta">
+            <a href="/portfolio/">View full portfolio →</a>
+          </p>
+        )}
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Our Specialized Services</h2>
+        <div class="services">
+          <article class="service">
+            <h3 class="service-title">Cabinet Designs</h3>
+            <p>
+              We are proud dealers of Bellmont Cabinet Co., offering high-quality, beautifully crafted cabinetry known for both style and durability.
+              For clients seeking something more tailored, we also provide fully custom cabinet layouts and designs to create a solution that fits your space and vision perfectly.
+            </p>
+          </article>
+          <article class="service">
+            <h3 class="service-title">New construction & Interior Remodels</h3>
+            <p>
+              From new construction to full home remodels, we guide your project from concept to completion with a clear, thoughtful approach.
+              Many of our clients come to us needing help with the layout of specific rooms, and our expertise in space planning ensures every square foot is used intentionally.
+              We work closely with builders and contractors to make sure each detail—layout, finishes, lighting, and cabinetry—comes together seamlessly to create a space that is both functional and beautifully cohesive.
+            </p>
+          </article>
+          <article class="service">
+            <h3 class="service-title">Furniture Design</h3>
+            <p>
+              We thoughtfully curate furniture and home accessories that bring warmth, texture, and personality to every space.
+              From foundational pieces to the finishing details, we layer each element with intention—creating interiors that feel cohesive, inviting, and beautifully complete.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container container-narrow">
+        <h2 class="section-title">The Philosophy</h2>
+        <p class="philosophy">
+          At Diane Rosellini and Associates LLC, our work is rooted in the belief that great design should be both beautiful and livable.
+          We approach every project with intention—balancing function, comfort, and timeless style to create spaces that truly support the way our clients live.
+          By listening closely, planning thoughtfully, and refining every detail, we design homes that feel cohesive, purposeful, and uniquely personal.
+        </p>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to begin your custom transformation?</h2>
+        <a href="#contact" class="cta-button">Contact us</a>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact us</h2>
+        <p class="section-intro">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        <ContactForm />
+      </div>
+    </section>
+  </main>
+  <Footer />
 </Layout>
+
+<style>
+  .hero {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+
+  .hero-amp {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .hero-tagline {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  .section-alt {
+    background: var(--color-surface);
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-intro {
+    text-align: center;
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: var(--space-lg);
+    margin-bottom: 0;
+  }
+
+  .container-narrow {
+    max-width: 40rem;
+  }
+
+  .portfolio-preview {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .card {
+    display: block;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-img {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: var(--space-md);
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-desc {
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .muted {
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .muted code {
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    background: var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .services {
+    display: grid;
+    gap: var(--space-xl);
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .service-title {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text);
+  }
+
+  .service p {
+    margin: 0;
+  }
+
+  .philosophy {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    text-align: center;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+  }
+
+  .cta-title {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    font-weight: 500;
+    color: var(--color-surface);
+    background: var(--color-text);
+    border-radius: var(--radius);
+    transition: opacity 0.2s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+    color: var(--color-surface);
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+// Contact form – set action to your Formspree/Netlify Forms/backend endpoint when ready
+---
+
+<form class="contact-form" action="#" method="POST" name="contact">
+  <label class="form-label" for="first-name">First name</label>
+  <input class="form-input" id="first-name" name="first-name" type="text" autocomplete="given-name" />
+
+  <label class="form-label" for="last-name">Last name</label>
+  <input class="form-input" id="last-name" name="last-name" type="text" autocomplete="family-name" />
+
+  <label class="form-label" for="email">Email <span class="required">*</span></label>
+  <input class="form-input" id="email" name="email" type="email" required autocomplete="email" />
+
+  <label class="form-label" for="topic">How can we help you? *</label>
+  <select class="form-input form-select" id="topic" name="topic" required>
+    <option value="">Select a topic</option>
+    <option value="new-construction">New construction</option>
+    <option value="remodel">Interior remodel</option>
+    <option value="cabinetry">Cabinet design</option>
+    <option value="furniture">Furniture design</option>
+    <option value="consultation">General consultation</option>
+    <option value="other">Other</option>
+  </select>
+
+  <label class="form-label" for="message">Message <span class="required">*</span></label>
+  <textarea class="form-input form-textarea" id="message" name="message" rows="5" required></textarea>
+
+  <button class="form-submit" type="submit">Submit</button>
+</form>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 28rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .required {
+    color: var(--color-accent);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: auto;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  .form-submit {
+    margin-top: var(--space-xs);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-surface);
+    background: var(--color-text);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .form-submit:hover {
+    opacity: 0.9;
+  }
+</style>

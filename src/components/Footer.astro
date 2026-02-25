@@ -1,0 +1,62 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <strong>Diane Rosellini and Associates LLC</strong>
+    </div>
+    <address class="footer-address">
+      7505 SE 28th ST Unit 001, Mercer Island WA 98040<br />
+      <a href="tel:+12063247981">(206) 324-7981</a>
+      <span aria-hidden="true"> · </span>
+      <a href="mailto:admin@dianerosellini.com">admin@dianerosellini.com</a>
+    </address>
+    <p class="footer-copy">© {currentYear} Diane Rosellini and Associates LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl) 0 var(--space-lg);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-inner {
+    max-width: 36rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-address {
+    font-style: normal;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-address a {
+    color: var(--color-text-muted);
+  }
+
+  .footer-address a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-copy {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>
