@@ -1,8 +1,9 @@
 ---
-// Contact form – set action to your Formspree/Netlify Forms/backend endpoint when ready
+// Contact form – Netlify Forms (data-netlify="true"). Submissions appear in Netlify dashboard.
 ---
 
-<form class="contact-form" action="#" method="POST" name="contact">
+<form class="contact-form" name="contact" method="POST" data-netlify="true" action="/#contact">
+  <input type="hidden" name="form-name" value="contact" />
   <label class="form-label" for="first-name">First name</label>
   <input class="form-input" id="first-name" name="first-name" type="text" autocomplete="given-name" />
 
